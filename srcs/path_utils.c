@@ -44,13 +44,27 @@ static char	*extract_path_env(char **envp)
 	return (envp[env_index] + char_index + 1);
 }
 
+char	*build_full_path(char *directory, char *command)
+{
+	char	*temp;
+	char	*full_path;
+
+	temp = ft_strjoin(directory, "/");
+	if (!temp)
+		return (NULL);
+	full_path = ft_strjoin(temp, command);
+	free(temp);
+	if (!full_path)
+		return (NULL);
+	return (full_path);
+}
+
 char	*resolve_command_path(char **envp, char *command,
 		char *original_command)
 {
 	int		index;
 	char	**paths;
 	char	*full_path;
-	char	*temp;
 
 	if (access(original_command, F_OK | X_OK) == 0)
 		return (original_command);
@@ -58,11 +72,7 @@ char	*resolve_command_path(char **envp, char *command,
 	index = 0;
 	while (paths && paths[index])
 	{
-		temp = ft_strjoin(paths[index], "/");
-		if (!temp)
-			break ;
-		full_path = ft_strjoin(temp, command);
-		free(temp);
+		full_path = build_full_path(paths[index], command);
 		if (!full_path)
 			break ;
 		if (access(full_path, F_OK | X_OK) == 0)
