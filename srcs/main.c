@@ -6,11 +6,26 @@
 /*   By: peda-cos <peda-cos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 07:28:31 by peda-cos          #+#    #+#             */
-/*   Updated: 2024/12/24 16:15:05 by peda-cos         ###   ########.fr       */
+/*   Updated: 2024/12/25 22:12:37 by peda-cos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+static void	handle_input_error(const char *out_file)
+{
+	int	file_out;
+
+	perror("Error: cannot read input file");
+	file_out = open(out_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (file_out == -1)
+	{
+		perror("Error: cannot open/create output file");
+		exit(EXIT_FAILURE);
+	}
+	close(file_out);
+	exit(EXIT_FAILURE);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -24,14 +39,11 @@ int	main(int argc, char **argv, char **envp)
 	}
 	file_in = open(argv[1], O_RDONLY);
 	if (file_in == -1)
-	{
-		perror("Error ");
-		exit(EXIT_FAILURE);
-	}
+		handle_input_error(argv[4]);
 	file_out = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (file_out == -1)
 	{
-		perror("Error ");
+		perror("Error: cannot open/create output file");
 		close(file_in);
 		exit(EXIT_FAILURE);
 	}
