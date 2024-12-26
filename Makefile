@@ -13,8 +13,7 @@
 NAME = pipex
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = srcs/main.c srcs/exec_utils.c  srcs/ft_split.c  srcs/path_utils.c  \
-	   srcs/str_utils.c
+SRCS = main.c exec_utils.c ft_split.c path_utils.c str_utils.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
