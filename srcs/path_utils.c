@@ -44,7 +44,7 @@ static char	*extract_path_env(char **envp)
 	return (envp[env_index] + char_index + 1);
 }
 
-char	*build_full_path(char *directory, char *command)
+static char	*build_full_path(char *directory, char *command)
 {
 	char	*temp;
 	char	*full_path;
