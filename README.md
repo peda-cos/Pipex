@@ -1,8 +1,5 @@
 # Pipex
 
-![Norminette](https://github.com/peda-cos/Pipex/workflows/norminette/badge.svg)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 A 42 School project that recreates the behavior of shell pipe (`|`) mechanism in C, allowing the execution of two commands in a pipeline, redirecting input and output through files.
 
 ## 📋 Description
